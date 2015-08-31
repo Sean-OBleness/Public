@@ -15,6 +15,14 @@ public:
 	Entry(BString contents, int line)
 	Entry(const Entry& e);
 	~Entry() { };
+	BString& contents();
+	int line();
+
+	friend ostream& operator << (ostream& s, Entry& e)
+	{
+        	s << e._contents;
+        	return s;
+	};	
 
 }
 
@@ -35,6 +43,15 @@ Entry::Entry(const Entry & e) : _contents(MAX_STRING_SIZE)
 	_line = e._line
 }
 
+BString& Entry::contents()
+{
+	return _contents;
+}
+
+int Entry::line()
+{
+	return _line;
+}
 
 
 #endif 

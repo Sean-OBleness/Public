@@ -8,7 +8,7 @@
 class File
 {
 private:
-	Vector<Entry> _entries;
+	Vector<Entry*> _entries;
 	BString _name; //is full path
 	int _instances;
 public:
@@ -16,8 +16,8 @@ public:
 	File(BString& name);
 	File(File& f);
 	~File() { };
-	void addEntry(Entry& e);
-	Entry& getEntry(int index);
+	void addEntry(Entry* e);
+	Entry* getEntry(int index);
 	BString name();
 	int instances();
 };
@@ -41,13 +41,13 @@ File::File(File& f) : _name(100)
 	_entries = f._entries;
 }
 
-void File::addEntry(Entry& e)
+void File::addEntry(Entry* e)
 {
 	_entries.add(e);
 	_instances++;
 }
 
-Entry& File::getEntry(int index)
+Entry* File::getEntry(int index)
 {
 	if(index > _entries.size()-1)
 		return _entries[_entries.size() - 1];

@@ -18,7 +18,7 @@ class BString : virtual public ArrayClass<char>
 public:
 	BString();
 	BString(int n);
-	BString(char* s);
+	BString(const char* s);
 	~BString();
 	BString(const BString& str);
 	virtual int size() const;
@@ -45,7 +45,7 @@ BString::BString() : ArrayClass<char>(1,'\0') {}
 
 BString::BString(int n) : ArrayClass<char>(n+1,'\0') {}
 
-BString::BString(char* s) : ArrayClass<char>(strlen(s)+1)
+BString::BString(const char* s) : ArrayClass<char>(strlen(s)+1)
 {
 	std::strcpy(pointer_Object, s);
 }

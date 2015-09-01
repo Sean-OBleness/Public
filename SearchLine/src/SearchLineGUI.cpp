@@ -30,8 +30,20 @@ int main()
 	char* tmp = new char[200];
 	cin >> tmp;
 	BString target(tmp);
-	
+	cout << '\n';
+
 	SearchFile(target, filename, currentCollection);
+
+	for(int i =0; i < currentCollection.size(); ++i)
+	{
+		File* pfile= currentCollection.getFile(i);
+		cout << pfile->name() << '\n';
+		for(int j = 0; j < pfile->instances(); ++j)
+		{
+			Entry* pentry = pfile->getEntry(j);
+			cout << pentry->line() << " : " << pentry->contents() << '\n';
+		}
+	}
 
 	cout << '\n';
 	return 0;
@@ -43,8 +55,10 @@ void SearchFile(BString& target, string filename, FileList& currentCollection)
 	bool addFileToCollection = false;
 	int lineNumber =0;
 	ifstream SearchFile(filename.c_str());//
-	
-	File* tmp = new File(filename);
+	BString test(filename.c_str());
+
+	//make a new freestore file
+	File* tmp = new File(test);
 
 	if(SearchFile.is_open())
 	{
@@ -60,9 +74,12 @@ void SearchFile(BString& target, string filename, FileList& currentCollection)
 				int result = KMPStringMatch(MyLine, target);
 				if(result > -1)
 				{
+					//set bool to add file
 					addFileToCollection = true;
+					//create new entry and add to tmp file
+					Entry* tmpentry = new Entry(MyLine, lineNumber);
+					tmp->addEntry(tmpentry);
 					
-					//cout << target << ": " << lineNumber << "\n" << MyLine << "\n\n";
 				}//result>-1
 
 			}//c == '\n'
@@ -78,6 +95,12 @@ void SearchFile(BString& target, string filename, FileList& currentCollection)
 		cout << "ERROR: Could not find file.\n";
 		return;
 	}//!argv[2]
+
+	if(addFileToCollection)
+		//cout << " adding Entry \n";
+		currentCollection.addFile(tmp);
+
+	return;
 
 }
 

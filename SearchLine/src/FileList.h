@@ -8,35 +8,32 @@
 class FileList
 {
 private:
-	Vector<File> _files;
-	int _size;
+	Vector<File*> _files;
 public:
 	FileList();
 	FileList(FileList& f);
 	~FileList() { };
-	void addFile(File& f);
-	File& getFile(int index);
+	void addFile(File* f);
+	File* getFile(int index);
 	int size();
 };
 
 FileList::FileList()
 {
-	_size = 0;
+
 }
 
 FileList::FileList(FileList& f)
 {
 	_files = f._files;
-	_size = f._size;
 }
 
-void FileList::addFile(File& f)
+void FileList::addFile(File* f)
 {
 	_files.add(f);
-	_size++;
 }
 
-File& FileList::getFile(int index)
+File* FileList::getFile(int index)
 {
 	if(index > _files.size()-1)
 		return _files[_files.size()-1];
@@ -49,7 +46,7 @@ File& FileList::getFile(int index)
 
 int FileList::size()
 {
-	return _size;
+	return _files.size();
 }
 
 #endif

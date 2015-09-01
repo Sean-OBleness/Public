@@ -12,7 +12,7 @@ private:
 	int MAX_STRING_SIZE = 200;
 public:
 	Entry();
-	Entry(BString contents, int line)
+	Entry(BString contents, int line);
 	Entry(const Entry& e);
 	~Entry() { };
 	BString& contents();
@@ -22,9 +22,9 @@ public:
 	{
         	s << e._contents;
         	return s;
-	};	
+	}	
 
-}
+};
 
 Entry::Entry() : _contents(MAX_STRING_SIZE)
 {
@@ -40,7 +40,7 @@ Entry::Entry(BString contents, int line) : _contents(MAX_STRING_SIZE)
 Entry::Entry(const Entry & e) : _contents(MAX_STRING_SIZE)
 {
 	_contents = e._contents;
-	_line = e._line
+	_line = e._line;
 }
 
 BString& Entry::contents()

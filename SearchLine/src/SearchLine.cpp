@@ -10,7 +10,9 @@
 #include <stdlib.h>
 #include "ArrayClass.h"
 #include "Vector.h"
-
+#include "Entry.h"
+#include "File.h"
+#include "FileList.h"
 
 using std::cout;
 

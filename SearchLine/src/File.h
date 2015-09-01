@@ -20,7 +20,7 @@ public:
 	Entry& getEntry(int index);
 	BString name();
 	int instances();
-}
+};
 
 File::File() : _name(100)
 {
@@ -36,9 +36,9 @@ File::File(BString& name) : _name(100)
 
 File::File(File& f) : _name(100)
 {
-	_instances = e._instances;
-	_name = e.name;
-	_entries = e._entries;
+	_instances = f._instances;
+	_name = f._name;
+	_entries = f._entries;
 }
 
 void File::addEntry(Entry& e)
@@ -50,7 +50,7 @@ void File::addEntry(Entry& e)
 Entry& File::getEntry(int index)
 {
 	if(index > _entries.size()-1)
-		return _entries[_entries.size - 1];
+		return _entries[_entries.size() - 1];
 	if(index < 0)
 		return _entries[0];
 	
